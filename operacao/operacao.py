@@ -22,11 +22,24 @@ def adiciona():
             veiculo['descricao']  = descricao_car
 
             adicionar_prop(nome_pessoas, cpf, veiculo)
+            print('Informações adicionadas com sucesso!')
             break
         elif opcao == 2:
             adicionar_prop(nome_pessoas, cpf)
+            print('Informações adicionadas com sucesso!')
             break
         else:
             print('ERROR... Opção invalida. Digite apenas [1- para SIM | 2- para NÃO]: ')
 
+def excluir():
+    while True:
+        excluir = int(print('O que deseja excluir? [1-Tudo/2-Veículo]'))
+        if excluir == 1:
+
+            break
+        elif excluir ==2:
+
+            break
+        else:
+            print('ERROR... Opção invalida. Digite apenas [1- para TUDO | 2- para VEÍCULO]: ')
 

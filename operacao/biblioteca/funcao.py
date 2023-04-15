@@ -21,7 +21,7 @@ def adicionar_prop(nome, cpf, veiculo=None):
     if veiculo:
         propietario[nome] = nome
         propietario[cpf] = cpf
-        propietario[veiculo] = veiculo
+        propietario['veiculo'] = veiculo
 
         dados[cpf] = propietario
     else:
