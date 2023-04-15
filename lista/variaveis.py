@@ -1,3 +1,5 @@
+from prettytable import PrettyTable
+
 #biblioteca de proprietário
 propietario = {}
 veiculo = {}
@@ -11,3 +13,6 @@ descricao_car = None
 obs_propietario = None
 opcao = None
 excluir = None
+
+
+menu_instance = PrettyTable()
