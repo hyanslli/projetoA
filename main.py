@@ -1,4 +1,4 @@
-#Projeto Detra - De Willian Viana de Sousa
+#Projeto Detra - De Willian Viana de Sousa e Josué Luiz Barbosa e Silva
 from operacao.operacao import *
 from lista.variaveis import opcao
 

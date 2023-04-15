@@ -33,4 +33,6 @@ def adicionar_prop(nome, cpf, veiculo=None):
 
 # Excluir Dados
 def excluir_dados(nome, cpf, veiculo):
+    del dados[cpf]
+    del propietario[veiculo]
     
