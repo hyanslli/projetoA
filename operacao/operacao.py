@@ -21,8 +21,12 @@ def adiciona():
             veiculo['placa']  = placa
             veiculo['descricao']  = descricao_car
 
-            adicionar_prop(nome_pessoas, cpf, veiculo)
-            print('Informações adicionadas com sucesso!')
+            adiciona = adicionar_prop(nome_pessoas, cpf, veiculo)
+
+            if adiciona:
+                print(adiciona)
+            else:
+                print('Informações adicionadas com sucesso!')
             break
         elif opcao == 2:
             adicionar_prop(nome_pessoas, cpf)
