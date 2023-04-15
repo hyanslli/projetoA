@@ -1,19 +1,17 @@
 #Funções aplicadas no programa
-from prettytable import PrettyTable
 from lista.dados import *
 from lista.variaveis import *
 
 def menu():
-    menu = PrettyTable()
-    menu.add_column('Cadastro Detran', [
+    menu_instance.add_column('Cadastro Detran', [
         '[1] - Adicionar', 
         '[2] - excluir', 
         '[3] - Pesquisar', 
         '[4] - Alterar', 
         '[5] - Listar', 
         '[0] - Sair'])
-    menu.align['Cadastro Detran']= 'l'
-    print(menu)
+    menu_instance.align['Cadastro Detran']= 'l'
+    print(menu_instance)
 
 
 # Adicionando propietario
