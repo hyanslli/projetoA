@@ -18,15 +18,18 @@ def menu():
 
 # Adicionando propietario
 def adicionar_prop(nome, cpf, veiculo=None):
-    if veiculo:
-        propietario[nome] = nome
-        propietario[cpf] = cpf
-        propietario['veiculo'] = veiculo
-
-        dados[cpf] = propietario
+    if cpf in dados.keys():
+        return '[ERROR] CPF já existente!!!'
     else:
-        propietario[nome] = nome
-        propietario[cpf] = cpf
+        if veiculo:
+            propietario[nome] = nome
+            propietario[cpf] = cpf
+            propietario['veiculo'] = veiculo
 
-        dados[cpf] = propietario
+            dados[cpf] = propietario
+        else:
+            propietario[nome] = nome
+            propietario[cpf] = cpf
+
+            dados[cpf] = propietario
 
