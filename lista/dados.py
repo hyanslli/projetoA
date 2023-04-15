@@ -1,0 +1,5 @@
+#Biblioteca principal
+dados = {}
+
+
+
