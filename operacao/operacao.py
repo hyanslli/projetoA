@@ -35,7 +35,7 @@ def excluir():
     while True:
         excluir = int(print('O que deseja excluir? [1-Tudo/2-Veículo]'))
         if excluir == 1:
-            print('Digite o ')
+            print('Digite o CPF da pessoa que deseja excluir')
             break
         elif excluir ==2:
 
