@@ -12,7 +12,6 @@ cpf = 0
 descricao_car = None
 obs_propietario = None
 opcao = None
-excluir = None
 
 
 menu_instance = PrettyTable()

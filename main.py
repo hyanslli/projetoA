@@ -10,4 +10,6 @@ while True:
             break
         case 1:
             adiciona()
+        case 2:
+            excluir()
         

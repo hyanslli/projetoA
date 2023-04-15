@@ -37,12 +37,22 @@ def adiciona():
 
 def excluir():
     while True:
-        excluir = int(print('O que deseja excluir? [1-Tudo/2-Veículo]'))
-        if excluir == 1:
-            print('Digite o CPF da pessoa que deseja excluir')
+        print('''
+        [1]Todos os dados
+        [2]Veículo
+        ''')
+        opcao = int(input('O que deseja excluir?'))
+        if opcao == 1:
+            cpf = int(input('Digite o CPF da pessoa que deseja excluir: '))
+            if cpf in dados.values():
+                
+                print('Dados excluidos')
             break
-        elif excluir ==2:
+        elif opcao ==2:
+            cpf = int(input('Digite o CPF da pessoa que deseja excluir: '))
+            if cpf in dados.values():
 
+                print('Dados excluidos')
             break
         else:
             print('ERROR... Opção invalida. Digite apenas [1- para TUDO | 2- para VEÍCULO]: ')
