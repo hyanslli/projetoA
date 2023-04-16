@@ -37,6 +37,7 @@ def adiciona():
                     break
                 else:
                     error_opcao()
+            break
 
 
 def editar():
@@ -134,19 +135,33 @@ def listar():
             case 1:
                 cpf = int(input('Digite o CPF da pessoa a ser procurada: '))
                 if verifica(cpf):
-                    menu(cpf, pesquisar_dados(cpf))
+                    valores = pesquisar_dados(cpf)
+                    for v in valores:
+                        if v == 'veiculos' and valores[v] > 0:
+                            for p in valores[v]:
+                                lista.append(p)
+                        else:
+                            lista.append(valores[v])
+                    menu(cpf, lista)
                 else:
                     error_dado()
             case 2:
                 nome_pessoas = input("Nome do Proprietario: ").strip()
                 if verifica(nome=nome_pessoas):
-                    menu(nome_pessoas,pesquisar_dados(nome=nome_pessoas))
+                    menu(nome_pessoas, pesquisar_dados(nome=nome_pessoas))
                 else:
                     error_dado()
             case 3:
                 placa = int(input("Placa do veículo: "))
                 if verifica(placa=placa):
-                    menu(placa, pesquisar_dados(placa=placa))
+                    valores = pesquisar_dados(placa=placa)
+                    for v in valores:
+                        if v == 'veiculos' and valores[v] > 0:
+                            for p in valores[v]:
+                                lista.append(p)
+                        else:
+                            lista.append(valores[v])
+                    menu(placa, lista)
                 else:
                     error_dado()
             case 0:
