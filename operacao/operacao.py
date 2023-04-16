@@ -7,12 +7,12 @@ def adiciona():
     while True:
         limpar()
         cpf = int(input(f'CPF do proprietario: '))
+        nome_pessoas = input('Digite o nome do proprietário: ').strip()
         if verifica(cpf):
             print('CPF ja adicionado, consulte o CPF ja existente.')
             continue
         else:
             while True:
-                nome_pessoas = input('Digite o nome do proprietário: ').strip()
                 opcao = int(input('Deseja adicionar um veículo? [1-Sim/2-Não] '))
                 if opcao == 1:
                     while True:

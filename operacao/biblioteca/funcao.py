@@ -84,14 +84,14 @@ def edita_dado(cpf, nome=None, cpf_novo=None, placa=None, veiculo=None):
         temp_dado = dados[cpf].copy()
         del dados[cpf]
         temp_dado['cpf'] = cpf_novo
-        dados[cpf_novo] = temp_dado
+        dados[cpf_novo] = temp_dado.copy()
         return 'Feito com sucesso'
     elif nome:
         dados[cpf]['nome'] = nome
         return 'Feito com sucesso'
     else:
         del dados[cpf]['veiculos'][placa]
-        dados[cpf]['veiculos'][veiculo.keys()[0]] = veiculo.values()
+        dados[cpf]['veiculos'][veiculo.keys()[0]] = veiculo.values().copy()
         return 'Feito com sucesso'
 
 
