@@ -1,8 +1,9 @@
-#Projeto Detra - De Willian Viana de Sousa e Josué Luiz Barbosa e Silva
+# Projeto Detra - De Willian Viana de Sousa e Josué Luiz Barbosa e Silva
 from operacao.operacao import *
 
 while True:
-    opcao = cabecalho()
+    menu()
+    opcao = int(input("Digite a opção: "))
     match opcao:
         case 0:
             print('Saindo...')
@@ -13,4 +14,8 @@ while True:
             excluir()
         case 3:
             listar()
+        case 4:
+            editar()
+        case _:
+            error_opcao()
         
