@@ -7,6 +7,7 @@ from .Erros import *
 
 def menu(titulo=None, opcoes=None):
     menu_instance = PrettyTable()
+    menu_instance.clear()
     if titulo and opcoes:
         menu_instance.add_column(f'{titulo}', opcoes)
         menu_instance.align[f'{titulo}'] = 'l'
@@ -15,9 +16,8 @@ def menu(titulo=None, opcoes=None):
         menu_instance.add_column('Cadastro Detran', [
             '[1] - Adicionar',
             '[2] - excluir',
-            '[3] - Pesquisar',
+            '[3] - Pesquisar/Listar',
             '[4] - Alterar',
-            '[5] - Listar',
             '[0] - Sair'])
         menu_instance.align['Cadastro Detran']= 'l'
         print(menu_instance)
@@ -37,7 +37,6 @@ Mexendo com o DB
 
 # Verifica se o dado ja esta no DB
 def verifica(cpf=None, nome=None, placa=None):
-    l = []
     if cpf:
         if cpf in dados:
             return True
@@ -54,10 +53,12 @@ def verifica(cpf=None, nome=None, placa=None):
         else:
             return False
     else:
-        if placa in dados.values()['veiculo']:
-            return True
-        else:
-            return False
+        if 'veiculos' in dados.values():
+            for obj in dados.values():
+                if placa in obj['veiculos']:
+                    return True
+                else:
+                    return False
 
 
 # Adicionando propietario
@@ -65,14 +66,15 @@ def adicionar_prop(nome, cpf, veiculo=None):
     if veiculo:
         propietario['nome'] = nome
         propietario['cpf'] = cpf
-        propietario['veiculo'] = veiculo
+        propietario['veiculos'] = veiculo
 
-        dados[cpf] = propietario
+        dados[cpf] = propietario.copy()
     else:
         propietario['nome'] = nome
         propietario['cpf'] = cpf
+        propietario['veiculo'] = veiculo
 
-        dados[cpf] = propietario
+        dados[cpf] = propietario.copy()
     return 'Adicionado com sucesso!!!'
 
 
@@ -82,14 +84,14 @@ def edita_dado(cpf, nome=None, cpf_novo=None, placa=None, veiculo=None):
         temp_dado = dados[cpf].copy()
         del dados[cpf]
         temp_dado['cpf'] = cpf_novo
-        dados[cpf_novo] = temp_dado
+        dados[cpf_novo] = temp_dado.copy()
         return 'Feito com sucesso'
     elif nome:
         dados[cpf]['nome'] = nome
         return 'Feito com sucesso'
     else:
         del dados[cpf]['veiculos'][placa]
-        dados[cpf]['veiculos'][veiculo.keys()[0]] = veiculo.values()
+        dados[cpf]['veiculos'][veiculo.keys()[0]] = veiculo.values().copy()
         return 'Feito com sucesso'
 
 
