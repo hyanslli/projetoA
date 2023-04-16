@@ -80,5 +80,4 @@ def excluir():
 def listar():
     limpar()
     cpf = int(input('Digite o CPF da pessoa a ser procurada: '))
-    pesquisar_dados(cpf)
     
