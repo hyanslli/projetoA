@@ -16,23 +16,32 @@ def menu():
 
 # Adicionando propietario
 def adicionar_prop(nome, cpf, veiculo=None):
-    if cpf in dados.keys():
-        return '[ERROR] CPF já existente!!!'
+    if veiculo:
+        propietario[nome] = nome
+        propietario[cpf] = cpf
+        propietario['veiculo'] = veiculo
+
+        dados[cpf] = propietario
     else:
-        if veiculo:
-            propietario[nome] = nome
-            propietario[cpf] = cpf
-            propietario['veiculo'] = veiculo
+        propietario[nome] = nome
+        propietario[cpf] = cpf
 
-            dados[cpf] = propietario
-        else:
-            propietario[nome] = nome
-            propietario[cpf] = cpf
-
-            dados[cpf] = propietario
+        dados[cpf] = propietario
 
 # Excluir Dados
-def excluir_dados(nome, cpf, veiculo):
+def menu_excluir():
+    menu_instance = PrettyTable()
+    coluna = ['[1] - Tudo do usuario', '[2] - Apenas Veículo', '[0] - Cancelar']
+    menu_instance.add_column('        Excluir', coluna)
+    menu_instance.align = 'l'
+    print(menu_instance)
+
+
+def excluir_dados(cpf):
+
     del dados[cpf]
-    del propietario[veiculo]
     
+# Pesquisar
+def pesquisar_dados(cpf):
+    if cpf in dados.items():
+        print(dados)
