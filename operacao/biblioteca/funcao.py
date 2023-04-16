@@ -63,22 +63,18 @@ def verifica(cpf=None, nome=None, placa=None):
 
 # Adicionando propietario
 def adicionar_prop(nome, cpf, veiculo=None):
-    v = verifica(cpf, nome, veiculo.keys())
-    if v:
-        if veiculo:
-            propietario[nome] = nome
-            propietario[cpf] = cpf
-            propietario['veiculos'] = veiculo
+    if veiculo:
+        propietario['nome'] = nome
+        propietario['cpf'] = cpf
+        propietario['veiculo'] = veiculo
 
-            dados[cpf] = propietario
-        else:
-            propietario[nome] = nome
-            propietario[cpf] = cpf
-
-            dados[cpf] = propietario
-        return 'Adicionado com sucesso!'
+        dados[cpf] = propietario
     else:
-        print(v)
+        propietario['nome'] = nome
+        propietario['cpf'] = cpf
+
+        dados[cpf] = propietario
+    return 'Adicionado com sucesso!!!'
 
 
 # Exclusão de dados

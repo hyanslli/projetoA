@@ -23,8 +23,12 @@ def adiciona():
                     modelo_veiculo = input('Digite o modelo do veículo: ').strip()
                     placa = input('Digite a placa do veículo: ').strip()
                     descricao_car = input('Descrva o veículo: ')
+                    if verifica(placa=placa):
+                        print("Placa já cadastrada!!!")
+                        continue
 
                     veiculo[placa] = [modelo_veiculo, descricao_car]
+
                     opcao = int(input("Deseja continuar adicionando veículos? [0 - Não] "))
                     if opcao == 0:
                         break
@@ -47,17 +51,23 @@ def excluir():
         if opcao == 1:
             cpf = int(input('Digite o CPF da pessoa que deseja excluir: '))
             if verifica(cpf=cpf):
-                excluir_dados(cpf)
-                print('Dados excluidos')
-                break
-            else:
-                print('CPF não encontrado')
+                if cpf in dados.keys():
+                    excluir_dados(cpf)
+                    print('Dados excluidos')
+                    break
+                else:
+                    print('CPF não encontrado')
         elif opcao ==2:
             cpf = int(input('Digite o CPF do dono do veículo que deseja excluir: '))
             if verifica(cpf=cpf):
                 placa = int(input("Digite a placa dio veículo que deseja excluir: "))
                 excluir_dados(cpf, placa)
                 print('Dados excluidos')
+            cpf = int(input('Digite o CPF da pessoa que deseja excluir: '))
+            if cpf in dados.values():
+                if veiculo in propietario.values():
+                    excluir_dados(propietario)
+                    print('Dados excluidos')
                 break
             else: 
                 print('CPF não encontrado')
