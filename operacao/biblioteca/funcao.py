@@ -17,14 +17,14 @@ def menu():
 # Adicionando propietario
 def adicionar_prop(nome, cpf, veiculo=None):
     if veiculo:
-        propietario[nome] = nome
-        propietario[cpf] = cpf
+        propietario['nome'] = nome
+        propietario['Cpf'] = cpf
         propietario['veiculo'] = veiculo
 
         dados[cpf] = propietario
     else:
-        propietario[nome] = nome
-        propietario[cpf] = cpf
+        propietario['Nome'] = nome
+        propietario['CPF'] = cpf
 
         dados[cpf] = propietario
 
@@ -38,10 +38,12 @@ def menu_excluir():
 
 
 def excluir_dados(cpf):
-
     del dados[cpf]
+
     
 # Pesquisar
 def pesquisar_dados(cpf):
-    if cpf in dados.items():
-        print(dados)
+    if cpf in dados.keys():
+        print(dados[cpf])
+    else:
+        print('CPF não encontrado, digite um cpf valido ou adicione o CPF atual.')

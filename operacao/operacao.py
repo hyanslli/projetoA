@@ -44,7 +44,7 @@ def excluir():
         opcao = int(input('O que deseja excluir?: '))
         if opcao == 1:
             cpf = int(input('Digite o CPF da pessoa que deseja excluir: '))
-            if cpf in propietario.values():
+            if cpf in dados.keys():
                 excluir_dados(cpf)
                 print('Dados excluidos')
                 break
@@ -54,7 +54,7 @@ def excluir():
             cpf = int(input('Digite o CPF da pessoa que deseja excluir: '))
             if cpf in dados.values():
                 if veiculo in propietario.values():
-                    excluir_dados(veiculo)
+                    excluir_dados(propietario)
                     print('Dados excluidos')
                 break
             else: 
