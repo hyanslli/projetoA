@@ -29,12 +29,6 @@ def limpar():
     lista.clear()
 
 
-
-"""
-Mexendo com o DB
-"""
-
-
 # Verifica se o dado ja esta no DB
 def verifica(cpf=None, nome=None, placa=None):
     l = []
@@ -48,16 +42,23 @@ def verifica(cpf=None, nome=None, placa=None):
             return True
         else:
             return False
-    elif cpf and placa:
-        if placa in dados[cpf]['veiculos']:
-            return True
-        else:
-            return False
-    else:
+    elif placa:
         if placa in dados.values()['veiculo']:
             return True
         else:
             return False
+    else:
+        if verifica(cpf):
+            if type(placa) == list:
+                for p in placa:
+                    if verifica(placa=p):
+                        l.append(f'A placa {p} já tem um proprietario')
+                if len(l) == 0:
+                    return True
+                else:
+                    return l
+        else:
+            return 'CPF já cadastrado!!!'
 
 
 # Adicionando propietario
@@ -76,23 +77,6 @@ def adicionar_prop(nome, cpf, veiculo=None):
     return 'Adicionado com sucesso!!!'
 
 
-# Edição de dados
-def edita_dado(cpf, nome=None, cpf_novo=None, placa=None, veiculo=None):
-    if cpf_novo:
-        temp_dado = dados[cpf].copy()
-        del dados[cpf]
-        temp_dado['cpf'] = cpf_novo
-        dados[cpf_novo] = temp_dado
-        return 'Feito com sucesso'
-    elif nome:
-        dados[cpf]['nome'] = nome
-        return 'Feito com sucesso'
-    else:
-        del dados[cpf]['veiculos'][placa]
-        dados[cpf]['veiculos'][veiculo.keys()[0]] = veiculo.values()
-        return 'Feito com sucesso'
-
-
 # Exclusão de dados
 def excluir_dados(cpf, placa=None):
     if cpf:
@@ -102,7 +86,7 @@ def excluir_dados(cpf, placa=None):
     return 'Excluido com sucesso'
 
 
-# Pesquisar Dados
+# Pesquisar
 def pesquisar_dados(cpf=None, nome=None, placa=None):
     if cpf:
         try:
@@ -113,6 +97,8 @@ def pesquisar_dados(cpf=None, nome=None, placa=None):
         for dado in dados:
             if nome in dados[dado]:
                 lista.append(dados[dado])
+            else:
+                error_dado()
         return lista
     else:
         for dado in dados:
