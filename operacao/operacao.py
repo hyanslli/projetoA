@@ -3,6 +3,21 @@ from .biblioteca.funcao import *
 from lista.variaveis import *
 
 
+def operacao_complementar_listagem( dado):
+    fields_names = ['Nome', 'CPF', 'Veículos-placas']
+    for item in dado:
+        list_keys = []
+        if item == 'veiculos':
+            for key in dado[item].keys():
+                list_keys.append(key)
+            lista_dados_temp.append(list_keys)
+        else:
+            lista_dados_temp.append(dado[item])
+    lista_geral.append(lista_dados_temp)
+    menu(fields_names=fields_names, opcoes=lista_geral)
+    limpar()
+
+
 def adiciona():
     while True:
         limpar()
@@ -37,12 +52,13 @@ def adiciona():
                     break
                 else:
                     error_opcao()
+        break
 
 
 def editar():
     while True:
         limpar()
-        menu('Editar',['[1] - CPF', '[2] - Nome', '[3] - Veículo', '[0] - voltar'])
+        menu(titulo='Editar', opcoes=['[1] - CPF', '[2] - Nome', '[3] - Veículo', '[0] - voltar'])
         opcao = int(input("Digite a opção desejada: "))
         cpf = int(input("Digite o CPF casastrado: "))
         match opcao:
@@ -128,25 +144,25 @@ def excluir():
 def listar():
     while True:
         limpar()
-        menu('Listar', ['[1] - Por CPF', '[2] - Por nome', '[3] - Por placa', '[0] - voltar'])
+        menu(titulo='Listar', opcoes=['[1] - Por CPF', '[2] - Por nome', '[3] - Por placa', '[0] - voltar'])
         opcao = int(input("Digite a opção desejada: "))
         match opcao:
             case 1:
                 cpf = int(input('Digite o CPF da pessoa a ser procurada: '))
                 if verifica(cpf):
-                    menu(cpf, pesquisar_dados(cpf))
+                    dado = pesquisar_dados(cpf)
+                    operacao_complementar_listagem(dado)
                 else:
                     error_dado()
             case 2:
                 nome_pessoas = input("Nome do Proprietario: ").strip()
-                if verifica(nome=nome_pessoas):
-                    menu(nome_pessoas,pesquisar_dados(nome=nome_pessoas))
-                else:
-                    error_dado()
+                dado = pesquisar_dados(nome=nome_pessoas)
+                operacao_complementar_listagem(dado)
             case 3:
-                placa = int(input("Placa do veículo: "))
+                placa = input("Placa do veículo: ").strip()
                 if verifica(placa=placa):
-                    menu(placa, pesquisar_dados(placa=placa))
+                    dado = pesquisar_dados(placa=placa)
+                    operacao_complementar_listagem(dado)
                 else:
                     error_dado()
             case 0:
