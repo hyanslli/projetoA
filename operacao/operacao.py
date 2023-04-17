@@ -23,7 +23,7 @@ def adiciona():
                             print("Placa já cadastrada!!!")
                             continue
 
-                        veiculo[placa] = [modelo_veiculo, descricao_car]
+                        veiculo[placa] = (modelo_veiculo, descricao_car)
 
                         opcao = int(input("Deseja continuar adicionando veículos? [0 - Não] "))
                         if opcao == 0:
@@ -37,6 +37,7 @@ def adiciona():
                     break
                 else:
                     error_opcao()
+        break
 
 
 def editar():
@@ -90,6 +91,7 @@ def editar():
                 break
             case _:
                 error_opcao()
+        break
 
 
 def excluir():
@@ -128,5 +130,4 @@ def excluir():
 def listar():
     limpar()
     cpf = int(input('Digite o CPF da pessoa a ser procurada: '))
-    pesquisar_dados(cpf)
-    
+    print(pesquisar_dados(cpf))
