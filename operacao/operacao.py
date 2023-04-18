@@ -37,7 +37,6 @@ def adiciona():
                     break
                 else:
                     error_opcao()
-        break
 
 
 def editar():
@@ -128,6 +127,31 @@ def excluir():
 
 # Listar dados
 def listar():
-    limpar()
-    cpf = int(input('Digite o CPF da pessoa a ser procurada: '))
-    print(pesquisar_dados(cpf))
+    while True:
+        limpar()
+        menu('Listar', ['[1] - Por CPF', '[2] - Por nome', '[3] - Por placa', '[0] - voltar'])
+        opcao = int(input("Digite a opção desejada: "))
+        match opcao:
+            case 1:
+                cpf = int(input('Digite o CPF da pessoa a ser procurada: '))
+                if verifica(cpf):
+                    menu(cpf, pesquisar_dados(cpf))
+                else:
+                    error_dado()
+            case 2:
+                nome_pessoas = input("Nome do Proprietario: ").strip()
+                if verifica(nome=nome_pessoas):
+                    menu(nome_pessoas,pesquisar_dados(nome=nome_pessoas))
+                else:
+                    error_dado()
+            case 3:
+                placa = int(input("Placa do veículo: "))
+                if verifica(placa=placa):
+                    menu(placa, pesquisar_dados(placa=placa))
+                else:
+                    error_dado()
+            case 0:
+                print("Voltando...")
+                break
+            case _:
+                error_opcao()

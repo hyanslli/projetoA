@@ -3,8 +3,6 @@
 propietario = {}
 veiculo = {}
 lista = []
-lista_geral = []
-lista_dados_temp = []
 
 #variaveis
 nome_pessoas = None
