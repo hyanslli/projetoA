@@ -15,9 +15,8 @@ def menu(titulo=None, opcoes=None):
         menu_instance.add_column('Cadastro Detran', [
             '[1] - Adicionar',
             '[2] - excluir',
-            '[3] - Pesquisar',
+            '[3] - Pesquisar/listar',
             '[4] - Alterar',
-            '[5] - Listar',
             '[0] - Sair'])
         menu_instance.align['Cadastro Detran']= 'l'
         print(menu_instance)
@@ -42,17 +41,12 @@ def verifica(cpf=None, nome=None, placa=None):
         if cpf in dados:
             return True
         else:
-            return False
-    elif nome:
-        if nome in dados.values():
-            return True
-        else:
-            return False
-    elif cpf and placa:
-        if placa in dados[cpf]['veiculos']:
-            return True
-        else:
-            return False
+            for item in dados:
+                if len(dados[item]) != 0:
+                    if placa in dados[item]['veiculos']:
+                        return True
+                    else:
+                        return False
     else:
         if placa in dados.values()['veiculo']:
             return True
@@ -95,10 +89,10 @@ def edita_dado(cpf, nome=None, cpf_novo=None, placa=None, veiculo=None):
 
 # Exclusão de dados
 def excluir_dados(cpf, placa=None):
-    if cpf:
+    if cpf and placa == None:
         del dados[cpf]
     else:
-        del dados[cpf]['veiculos'][placa]
+        dados[cpf]['veiculos'].pop(placa)
     return 'Excluido com sucesso'
 
 
@@ -111,10 +105,10 @@ def pesquisar_dados(cpf=None, nome=None, placa=None):
             error_dado()
     elif nome:
         for dado in dados:
-            if nome in dados[dado]:
+            if nome == dados[dado]['nome']:
                 lista.append(dados[dado])
         return lista
     else:
         for dado in dados:
-            if placa in dados[dado]['veiculo']:
+            if placa in dados[dado]['veiculos']:
                 return dados[dado]
