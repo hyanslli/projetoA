@@ -5,19 +5,23 @@ from prettytable import PrettyTable
 from .Erros import *
 
 
-def menu(titulo=None, opcoes=None):
+def menu(titulo=None, fields_names=None, opcoes=None):
     menu_instance = PrettyTable()
     if titulo and opcoes:
         menu_instance.add_column(f'{titulo}', opcoes)
         menu_instance.align[f'{titulo}'] = 'l'
         print(menu_instance)
+    elif fields_names:
+        menu_instance.field_names = fields_names
+        for i in opcoes:
+            menu_instance.add_row([i[0], i[1], i[2]])
+        print(menu_instance)
     else:
         menu_instance.add_column('Cadastro Detran', [
             '[1] - Adicionar',
             '[2] - excluir',
-            '[3] - Pesquisar',
+            '[3] - Pesquisar/Listar',
             '[4] - Alterar',
-            '[5] - Listar',
             '[0] - Sair'])
         menu_instance.align['Cadastro Detran']= 'l'
         print(menu_instance)
@@ -27,6 +31,8 @@ def limpar():
     veiculo.clear()
     propietario.clear()
     lista.clear()
+    lista_geral.clear()
+    lista_dados_temp.clear()
 
 
 
@@ -37,36 +43,31 @@ Mexendo com o DB
 
 # Verifica se o dado ja esta no DB
 def verifica(cpf=None, nome=None, placa=None):
-    l = []
-    if cpf:
-        if cpf in dados:
-            return True
+    if len(dados) != 0:
+        if cpf:
+            if cpf in dados:
+                return True
+            else:
+                return False
+        elif nome:
+            if nome in dados.values():
+                return True
+            else:
+                return False
+        elif cpf and placa:
+            if placa in dados[cpf]['veiculos']:
+                return True
+            else:
+                return False
         else:
-<<<<<<< HEAD
             for item in dados:
                 if len(dados[item]) != 0:
-                    if placa in dados.values()['veiculos']:
+                    if placa in dados[item]['veiculos']:
                         return True
                     else:
                         return False
-=======
-            return False
-    elif nome:
-        if nome in dados.values():
-            return True
-        else:
-            return False
-    elif cpf and placa:
-        if placa in dados[cpf]['veiculos']:
-            return True
-        else:
-            return False
->>>>>>> parent of 0d7f4c4 (versao 1.10.2)
     else:
-        if placa in dados.values()['veiculo']:
-            return True
-        else:
-            return False
+        return False
 
 
 # Adicionando propietario
@@ -74,14 +75,15 @@ def adicionar_prop(nome, cpf, veiculo=None):
     if veiculo:
         propietario['nome'] = nome
         propietario['cpf'] = cpf
-        propietario['veiculo'] = veiculo
+        propietario['veiculos'] = veiculo.copy()
 
-        dados[cpf] = propietario
+        dados[cpf] = propietario.copy()
     else:
         propietario['nome'] = nome
         propietario['cpf'] = cpf
+        propietario['veiculos'] = {}
 
-        dados[cpf] = propietario
+        dados[cpf] = propietario.copy()
     return 'Adicionado com sucesso!!!'
 
 
@@ -104,10 +106,10 @@ def edita_dado(cpf, nome=None, cpf_novo=None, placa=None, veiculo=None):
 
 # Exclusão de dados
 def excluir_dados(cpf, placa=None):
-    if cpf:
+    if cpf and placa == None:
         del dados[cpf]
     else:
-        del dados[cpf]['veiculos'][placa]
+        dados[cpf]['veiculos'].pop(placa)
     return 'Excluido com sucesso'
 
 
@@ -120,10 +122,10 @@ def pesquisar_dados(cpf=None, nome=None, placa=None):
             error_dado()
     elif nome:
         for dado in dados:
-            if nome in dados[dado]:
+            if nome == dados[dado]['nome']:
                 lista.append(dados[dado])
         return lista
     else:
         for dado in dados:
-            if placa in dados[dado]['veiculo']:
+            if placa in dados[dado]['veiculos']:
                 return dados[dado]
