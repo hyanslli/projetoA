@@ -4,31 +4,22 @@ from lista.variaveis import *
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 def operacao_complementar_listagem(dado):
+=======
+def operacao_complementar_listagem( dado):
+>>>>>>> parent of f847b78 (version 1.10.5)
     fields_names = ['Nome', 'CPF', 'Veículos-placas']
-    if type(dado) == dict:
-        for item in dado:
-            list_keys = []
-            if item == 'veiculos':
-                for key in dado[item].keys():
-                    list_keys.append(key)
-                lista_dados_temp.append(list_keys)
-            else:
-                lista_dados_temp.append(dado[item])
-        lista_geral.append(lista_dados_temp)
-        menu(fields_names=fields_names, opcoes=lista_geral)
-    else:
-        for item in dado:
-            list_keys = []
-            for k in item:
-                if k == 'veiculos':
-                    for key in item[k].keys():
-                        list_keys.append(key)
-                    lista_dados_temp.append(list_keys)
-                else:
-                    lista_dados_temp.append(item[k])
-            lista_geral.append(lista_dados_temp)
-        menu(fields_names=fields_names, opcoes=lista_geral)
+    for item in dado:
+        list_keys = []
+        if item == 'veiculos':
+            for key in dado[item].keys():
+                list_keys.append(key)
+            lista_dados_temp.append(list_keys)
+        else:
+            lista_dados_temp.append(dado[item])
+    lista_geral.append(lista_dados_temp)
+    menu(fields_names=fields_names, opcoes=lista_geral)
     limpar()
 
 
@@ -68,7 +59,11 @@ def adiciona():
                     break
                 else:
 <<<<<<< HEAD
+<<<<<<< HEAD
                     print(error_opcao())
+=======
+                    error_opcao()
+>>>>>>> parent of f847b78 (version 1.10.5)
         break
 =======
                     error_opcao()
@@ -87,20 +82,20 @@ def editar():
                 print("Verificando...")
                 if verifica(cpf):
                     print('[OK] CPF')
-                    if verifica(cpf_novo) == False:
-                        print('[OK] CPF NOVO')
+                    if verifica(cpf_novo):
+                        print('[OK] CPF')
                         print(edita_dado(cpf, cpf_novo=cpf_novo))
                     else:
-                        print(error_dado())
+                        error_dado()
                 else:
-                    print(error_dado())
+                    error_dado()
             case 2:
                 nome_pessoas = input("Novo nome: ").strip()
                 if verifica(cpf):
                     print('[OK] CPF')
                     print(edita_dado(cpf, nome=nome_pessoas))
                 else:
-                    print(error_dado())
+                    error_dado()
             case 3:
                 placa_velha = int(input("Placa registrada: "))
                 placa = int(input("Placa nova: "))
@@ -116,22 +111,22 @@ def editar():
                             print('[OK] Placa nova')
                             print(edita_dado(cpf, placa=placa_velha, veiculo=veiculo))
                         else:
-                            print(error_dado_existente())
+                            error_dado_existente()
                     else:
-                        print(error_dado())
+                        error_dado()
                 else:
-                    print(error_dado())
+                    error_dado()
             case 0:
                 print('Voltando...')
                 break
             case _:
-                print(error_opcao())
+                error_opcao()
 
 
 def excluir():
     while True:
         limpar()
-        menu(titulo='Excluir', opcoes=['[1] - Tudo', '[2] - Veículo', '[0] - Voltar'])
+        menu('Excluir', ['[1] - Tudo', '[2] - Veículo', '[0] - Voltar'])
         opcao = int(input('O que deseja excluir?: '))
         cpf = int(input('Digite o CPF cadastrado: '))
         if opcao == 1:
@@ -145,20 +140,19 @@ def excluir():
         elif opcao == 2:
             if verifica(cpf=cpf):
                 print('[OK] CPF')
-                placa = input("Digite a placa do veículo que deseja excluir: ")
+                placa = int(input("Digite a placa do veículo que deseja excluir: "))
                 if verifica(cpf, placa=placa):
                     excluir_dados(cpf, placa)
-                    print('Veículo excluido!!!')
                     break
                 else:
-                    print(error_dado())
+                    error_dado()
             else: 
-                print(error_dado())
+                error_dado()
         elif opcao == 0:
             print('Voltando....')
             break
         else:
-            print(error_opcao())
+            error_opcao()
 
 
 # Listar dados
