@@ -42,12 +42,26 @@ def verifica(cpf=None, nome=None, placa=None):
         if cpf in dados:
             return True
         else:
+<<<<<<< HEAD
             for item in dados:
                 if len(dados[item]) != 0:
                     if placa in dados.values()['veiculos']:
                         return True
                     else:
                         return False
+=======
+            return False
+    elif nome:
+        if nome in dados.values():
+            return True
+        else:
+            return False
+    elif cpf and placa:
+        if placa in dados[cpf]['veiculos']:
+            return True
+        else:
+            return False
+>>>>>>> parent of 0d7f4c4 (versao 1.10.2)
     else:
         if placa in dados.values()['veiculo']:
             return True

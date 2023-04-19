@@ -2,8 +2,8 @@
 from .biblioteca.funcao import *
 from lista.variaveis import *
 
-
 def operacao_complementar_listagem( dado):
+
     fields_names = ['Nome', 'CPF', 'Veículos-placas']
     for item in dado:
         list_keys = []
@@ -16,7 +16,6 @@ def operacao_complementar_listagem( dado):
     lista_geral.append(lista_dados_temp)
     menu(fields_names=fields_names, opcoes=lista_geral)
     limpar()
-
 
 def adiciona():
     while True:
@@ -51,9 +50,6 @@ def adiciona():
                     print('Informações adicionadas com sucesso!')
                     break
                 else:
-                    error_opcao()
-        break
-
 
 def editar():
     while True:
