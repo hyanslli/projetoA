@@ -15,8 +15,9 @@ def menu(titulo=None, opcoes=None):
         menu_instance.add_column('Cadastro Detran', [
             '[1] - Adicionar',
             '[2] - excluir',
-            '[3] - Pesquisar/listar',
+            '[3] - Pesquisar',
             '[4] - Alterar',
+            '[5] - Listar',
             '[0] - Sair'])
         menu_instance.align['Cadastro Detran']= 'l'
         print(menu_instance)
@@ -43,7 +44,7 @@ def verifica(cpf=None, nome=None, placa=None):
         else:
             for item in dados:
                 if len(dados[item]) != 0:
-                    if placa in dados[item]['veiculos']:
+                    if placa in dados.values()['veiculos']:
                         return True
                     else:
                         return False
@@ -89,10 +90,10 @@ def edita_dado(cpf, nome=None, cpf_novo=None, placa=None, veiculo=None):
 
 # Exclusão de dados
 def excluir_dados(cpf, placa=None):
-    if cpf and placa == None:
+    if cpf:
         del dados[cpf]
     else:
-        dados[cpf]['veiculos'].pop(placa)
+        del dados[cpf]['veiculos'][placa]
     return 'Excluido com sucesso'
 
 
@@ -105,10 +106,10 @@ def pesquisar_dados(cpf=None, nome=None, placa=None):
             error_dado()
     elif nome:
         for dado in dados:
-            if nome == dados[dado]['nome']:
+            if nome in dados[dado]:
                 lista.append(dados[dado])
         return lista
     else:
         for dado in dados:
-            if placa in dados[dado]['veiculos']:
+            if placa in dados[dado]['veiculo']:
                 return dados[dado]
