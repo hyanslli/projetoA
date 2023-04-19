@@ -3,6 +3,7 @@ from .biblioteca.funcao import *
 from lista.variaveis import *
 
 
+<<<<<<< HEAD
 def operacao_complementar_listagem(dado):
     fields_names = ['Nome', 'CPF', 'Veículos-placas']
     if type(dado) == dict:
@@ -31,6 +32,8 @@ def operacao_complementar_listagem(dado):
     limpar()
 
 
+=======
+>>>>>>> parent of 0d7f4c4 (versao 1.10.2)
 def adiciona():
     while True:
         limpar()
@@ -64,8 +67,12 @@ def adiciona():
                     print('Informações adicionadas com sucesso!')
                     break
                 else:
+<<<<<<< HEAD
                     print(error_opcao())
         break
+=======
+                    error_opcao()
+>>>>>>> parent of 0d7f4c4 (versao 1.10.2)
 
 
 def editar():
