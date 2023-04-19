@@ -4,7 +4,6 @@ from lista.variaveis import *
 
 
 def operacao_complementar_listagem( dado):
-    fields_names = ['Nome', 'CPF', 'Veículos-placas']
     if type(dado) == dict:
         for item in dado:
             list_keys = []
